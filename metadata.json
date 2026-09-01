@@ -1,0 +1,6 @@
+{
+  "name": "Curious Moves",
+  "description": "Yoga, yaratıcı drama ve felsefeyle çocuğun bedensel, duygusal ve zihinsel gelişimini bütünsel olarak destekleyen, Türkçe / İngilizce / Almanca sunulan uzman pedagoji ve gelişim programları.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
