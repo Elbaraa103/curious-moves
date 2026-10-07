@@ -17,6 +17,33 @@ async function startServer() {
     fs.mkdirSync(publicDir, { recursive: true });
   }
 
+  // Direct download route for the standalone HTML file
+  app.get(["/download/html", "/indir/html"], (req, res) => {
+    const htmlPath = path.join(publicDir, "curious_moves_berlin.html");
+    if (fs.existsSync(htmlPath)) {
+      return res.download(htmlPath, "curious_moves_berlin.html");
+    }
+    return res.status(404).send("HTML file not found");
+  });
+
+  // Direct download route for the full project ZIP
+  app.get(["/download/zip", "/indir/zip"], (req, res) => {
+    const zipPath = path.join(publicDir, "curious_moves_berlin_kodlar.zip");
+    if (fs.existsSync(zipPath)) {
+      return res.download(zipPath, "curious_moves_berlin_kodlar.zip");
+    }
+    return res.status(404).send("ZIP file not found");
+  });
+
+  // Direct download route for package.json
+  app.get(["/download/package-json", "/indir/package.json", "/indir/package-json"], (req, res) => {
+    const pkgPath = path.join(process.cwd(), "package.json");
+    if (fs.existsSync(pkgPath)) {
+      return res.download(pkgPath, "package.json");
+    }
+    return res.status(404).send("package.json not found");
+  });
+
   // API route to get avatar
   app.get("/api/avatar", (req, res) => {
     const avatarPath = path.join(publicDir, "dilan-avatar.jpg");
