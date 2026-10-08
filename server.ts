@@ -35,6 +35,15 @@ async function startServer() {
     return res.status(404).send("ZIP file not found");
   });
 
+  // Direct download route for Netlify deploy zip
+  app.get(["/download/netlify", "/indir/netlify"], (req, res) => {
+    const netlifyZipPath = path.join(publicDir, "netlify_deploy_dist.zip");
+    if (fs.existsSync(netlifyZipPath)) {
+      return res.download(netlifyZipPath, "netlify_deploy_dist.zip");
+    }
+    return res.status(404).send("Netlify package not found");
+  });
+
   // Direct download route for package.json
   app.get(["/download/package-json", "/indir/package.json", "/indir/package-json"], (req, res) => {
     const pkgPath = path.join(process.cwd(), "package.json");
